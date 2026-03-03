@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jupiterweb</title>
+    <style>
+        body {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+        }
+        img {
+            width: 150px;
+        }
+        #line1 {
+            background-color: rgb(234, 0, 255);
+            height: 1vh;
+        }
+        #line2 {
+            background-color: rgb(255, 0, 191);
+            height: 1vh;
+        }
+        #line3 {
+            background-color: rgb(255, 0, 119);
+            height: 2vh;
+        }
+
+        main {
+            margin: 3vh 0vh;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        nav {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0.1vw;
+        }
+        .nav-box{
+            margin: 0.1vw;
+            border: 2px solid grey;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 180px;
+            border-radius: 5px;
+        }
+        .nav-box-top {
+            margin: 1px 1px;
+            border-radius: 2px;
+            background-color: rgb(255, 0, 128);
+            width: 98%;
+            text-align: center;
+        }
+
+        .nav-buttons {
+            width: 100%;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .nav-buttons:hover {
+            background-color: rgb(255, 167, 211);
+            display: block;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .div-form {
+            flex: 1;
+            padding: 0vh 2vw;
+        }
+        .text-input {
+            width: 180px;
+            height: 30px;
+            border-radius: 40px;
+            margin: 1vh;
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .entrar {
+            width: 150px;
+            height: 28px;
+            font-size: 17px;
+            border-radius: 40px;
+        }
+
+        .entrar:hover {
+            cursor: pointer;
+        }
+
+        #rodape1 {
+            margin-bottom: 2px;
+            text-align: center;
+        }
+
+        #rodape2 {
+            font-size: 12px;
+            margin: 2px;
+            text-align: center;
+        }
+
+    
+    </style>
+</head>
+<body>
+    <header>
+        <div></div>
+        <img src="https://uspdigital.usp.br/comumwebdev/imagens/cabecalho/usp-logo.png">
+        <img src="https://uspdigital.usp.br/comumwebdev/imagens/cabecalho/usp-logo-texto.png">
+        <div id="line1"></div>
+        <div id="line2"></div>
+        <div id="line3"></div>
+    </header>
+    <main>
+        <nav>
+            <div class="nav-box">
+                <div class="nav-box-top">Público</div>
+                <a class="nav-buttons">Calendário Escolar</a>
+                <a class="nav-buttons">Cursos de ingresso</a>
+                <a class="nav-buttons">Disciplina</a>
+                <a class="nav-buttons">Editais</a>
+                <a class="nav-buttons">FAQ</a>
+            </div>
+            <div class="nav-box">
+                <div class="nav-box-top">Acesso Restrito</div>
+                <a class="nav-buttons">Entrar</a>
+                <a class="nav-buttons">Esqueci a Senha</a>
+                <a class="nav-buttons">Primeiro Acesso</a>
+            </div>
+        </nav>
+        <div class="div-form">
+            <p style="margin-bottom: 2px;">Login</p>
+            <hr>
+            <br>
+            <form>
+                <input type="text" class="text-input" placeholder="Usuário">
+                <input type="password" class="text-input" placeholder="Senha">
+                <input type="submit" value="Entrar" class="entrar">
+
+            </form>
+            <br>
+            <hr>
+            <p id="rodape1"><a>Créditos</a> | <a>Fale conosco</a></p>
+            <p id="rodape2">© 1999 - 2026 - Superintendência de Tecnologia da Informação/USP</p>
+        </div>
+    </main>
+    
+</body>
+</html>
