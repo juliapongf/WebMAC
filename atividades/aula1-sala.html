@@ -8,24 +8,29 @@
         body {
             font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
         }
-        img {
-            width: 150px;
+
+        header {
+            display: flex;
         }
+
         #line1 {
-            background-color: rgb(234, 0, 255);
-            height: 1vh;
+            background-color: rgb(251, 181, 33);
+            height: 5px;
+            width: 100%;
         }
         #line2 {
-            background-color: rgb(255, 0, 191);
-            height: 1vh;
+            background-color: rgb(100, 196, 211);
+            height: 5px;
+            width: 100%;
         }
         #line3 {
-            background-color: rgb(255, 0, 119);
-            height: 2vh;
+            background-color: rgb(16, 148, 171);
+            height: 10px;
+            width: 100%;
         }
 
         main {
-            margin: 3vh 0vh;
+            margin: 20px 0px;
             padding: 0;
             display: flex;
             justify-content: space-between;
@@ -34,10 +39,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin: 0.1vw;
+            margin: 2px;
         }
         .nav-box{
-            margin: 0.1vw;
+            margin: 2px;
             border: 2px solid grey;
             display: flex;
             flex-direction: column;
@@ -48,19 +53,21 @@
         .nav-box-top {
             margin: 1px 1px;
             border-radius: 2px;
-            background-color: rgb(255, 0, 128);
+            background-color: rgb(16, 148, 171);
             width: 98%;
             text-align: center;
+            line-height: 35px;
         }
 
         .nav-buttons {
             width: 100%;
             text-align: center;
             cursor: pointer;
+            line-height: 35px;
         }
 
         .nav-buttons:hover {
-            background-color: rgb(255, 167, 211);
+            background-color: rgb(167, 206, 211);
             display: block;
         }
 
@@ -71,13 +78,13 @@
         }
         .div-form {
             flex: 1;
-            padding: 0vh 2vw;
+            padding: 0px 5px;
         }
         .text-input {
             width: 180px;
             height: 30px;
             border-radius: 40px;
-            margin: 1vh;
+            margin: 5px;
             display: flex;
             justify-content: center;
             align-items: center; 
@@ -94,17 +101,53 @@
 
         .entrar:hover {
             cursor: pointer;
+            background-color: rgb(167, 206, 211);
+        }
+
+        .entrar:active {
+            cursor: pointer;
+            background-color: rgb(152, 204, 211);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
         }
 
         #rodape1 {
             margin-bottom: 2px;
-            text-align: center;
         }
 
         #rodape2 {
             font-size: 12px;
             margin: 2px;
-            text-align: center;
+        }
+
+        @media (max-width: 600px){
+            main {
+                flex-direction: column;
+            }
+            header {
+                flex-direction: column;
+                align-items: center;
+            }
+
+        }
+
+        @media (max-width: 400px) {
+            main {
+                flex-direction: column;
+            }
+            header {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-box{
+                width: 90%;
+                border-radius: 3%;
+            }
+
         }
 
     
@@ -113,12 +156,14 @@
 <body>
     <header>
         <div></div>
-        <img src="https://uspdigital.usp.br/comumwebdev/imagens/cabecalho/usp-logo.png">
-        <img src="https://uspdigital.usp.br/comumwebdev/imagens/cabecalho/usp-logo-texto.png">
-        <div id="line1"></div>
-        <div id="line2"></div>
-        <div id="line3"></div>
+        <img style="width: 130px; margin-left: 20px; margin-bottom: 10px;" src="https://uspdigital.usp.br/comumwebdev/imagens/cabecalho/usp-logo.png">
+        <img style="width: 260px; margin-left: 30px; margin-bottom: 5px;" src="https://uspdigital.usp.br/comumwebdev/imagens/cabecalho/usp-logo-texto.png">
     </header>
+
+    <div id="line1"></div>
+    <div id="line2"></div>
+    <div id="line3"></div>
+
     <main>
         <nav>
             <div class="nav-box">
@@ -146,10 +191,11 @@
                 <input type="submit" value="Entrar" class="entrar">
 
             </form>
-            <br>
-            <hr>
-            <p id="rodape1"><a>Créditos</a> | <a>Fale conosco</a></p>
-            <p id="rodape2">© 1999 - 2026 - Superintendência de Tecnologia da Informação/USP</p>
+            <footer>
+                <hr>
+                <p id="rodape1"><a>Créditos</a> | <a>Fale conosco</a></p>
+                <p id="rodape2">© 1999 - 2026 - Superintendência de Tecnologia da Informação/USP</p>
+            </footer>
         </div>
     </main>
     
