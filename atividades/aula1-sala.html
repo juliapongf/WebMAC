@@ -64,6 +64,8 @@
             text-align: center;
             cursor: pointer;
             line-height: 35px;
+            text-decoration: none;
+            color: black;
         }
 
         .nav-buttons:hover {
@@ -123,18 +125,11 @@
             margin: 2px;
         }
 
-        @media (max-width: 600px){
-            main {
-                flex-direction: column;
-            }
-            header {
-                flex-direction: column;
-                align-items: center;
-            }
-
+        .footer-link {
+            color: olive;
         }
 
-        @media (max-width: 400px) {
+        @media (max-width: 600px) {
             main {
                 flex-direction: column;
             }
@@ -168,17 +163,17 @@
         <nav>
             <div class="nav-box">
                 <div class="nav-box-top">Público</div>
-                <a class="nav-buttons">Calendário Escolar</a>
-                <a class="nav-buttons">Cursos de ingresso</a>
-                <a class="nav-buttons">Disciplina</a>
-                <a class="nav-buttons">Editais</a>
-                <a class="nav-buttons">FAQ</a>
+                <a class="nav-buttons" href="https://uspdigital.usp.br/jupiterweb/jupArquivosPublicos.jsp?tiparq=9&anoprg=2026&codmnu=6863">Calendário Escolar</a>
+                <a class="nav-buttons" href="https://uspdigital.usp.br/jupiterweb/jupCarreira.jsp?codmnu=8275">Cursos de ingresso</a>
+                <a class="nav-buttons" href="https://uspdigital.usp.br/jupiterweb/jupDisciplinaBusca?tipo=D&codmnu=6755">Disciplina</a>
+                <a class="nav-buttons" href="https://uspdigital.usp.br/juno/bnfArquivosPublicos.jsp?tiparq=1&anoprg=2025&codm?codmnu=11502">Editais</a>
+                <a class="nav-buttons" href="http://www.prg.usp.br/?p=20741&codmnu=8063">FAQ</a>
             </div>
             <div class="nav-box">
                 <div class="nav-box-top">Acesso Restrito</div>
-                <a class="nav-buttons">Entrar</a>
-                <a class="nav-buttons">Esqueci a Senha</a>
-                <a class="nav-buttons">Primeiro Acesso</a>
+                <a class="nav-buttons" href="https://uspdigital.usp.br/jupiterweb/webLogin.jsp">Entrar</a>
+                <a class="nav-buttons" href="https://uspdigital.usp.br/jupiterweb/esqueciSenha">Esqueci a Senha</a>
+                <a class="nav-buttons" href="https://uspdigital.usp.br/jupiterweb/primeiroAcesso">Primeiro Acesso</a>
             </div>
         </nav>
         <div class="div-form">
@@ -193,7 +188,7 @@
             </form>
             <footer>
                 <hr>
-                <p id="rodape1"><a>Créditos</a> | <a>Fale conosco</a></p>
+                <p id="rodape1"><a class="footer-link" href="https://uspdigital.usp.br/jupiterweb/creditos.jsp">Créditos</a> | <a class="footer-link" href="https://uspdigital.usp.br/jupiterweb/jupColegiadoEmailLista">Fale conosco</a></p>
                 <p id="rodape2">© 1999 - 2026 - Superintendência de Tecnologia da Informação/USP</p>
             </footer>
         </div>
