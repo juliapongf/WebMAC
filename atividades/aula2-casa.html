@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 2 - Exercícios de casa</title>
+    <style>
+        div {
+            border: 3px solid rgb(250, 12, 159);
+            margin: 10px;
+        }
+        #ex1 {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="ex1">
+        <h1>Exercício 1</h1>
+        <button onclick="alternarLuz()">INTERRUPTOR</button>
+        <p id="luz">A luz está APAGADA</p>
+
+    </div>
+
+    <div id="ex2">
+        <button onclick="contador()">Dobrar</button>
+        <h2>2</h2>
+    </div>
+
+    <script>
+        function alternarLuz() {
+            let texto = document.getElementById('luz');
+            let ex1 = document.getElementById('ex1');
+            if (texto.innerHTML === "A luz está APAGADA") {
+                texto.innerHTML = "A luz está ACESA"
+                ex1.style.backgroundColor = 'white';
+                ex1.style.color = 'black';
+            }
+            else {
+                texto.innerHTML = "A luz está APAGADA";
+                ex1.style.backgroundColor = 'black';
+                ex1.style.color = 'white';
+            }
+        }
+
+        let valor = 2;
+        function contador(){
+            let texto = document.querySelector('h2');
+            valor = 2*valor;
+            texto.innerHTML = valor;
+            if (valor >= 100) {
+                alert(`Cuidado, o número ${valor} está ficando muito grande!`);
+            }
+        }
+    </script>
+</body>
+</html>
