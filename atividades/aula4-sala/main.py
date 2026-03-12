@@ -176,10 +176,17 @@ async def create_user(usuario: Usuario):
     return usuario
 
 @app.get("/users")
-async def read_users(index: int = -1):
-    if (index >= 0) {
+async def read_users(index: int | None = None):
+    if (index is None):
         return usuarios
-    }
-    else {
-        return usuarios[index]
-    }
+    elif (index >= 0 and index < len(usuarios)):
+        return usuarios[index]    
+    else:
+        return []
+
+    
+@app.delete("/users")
+async def delete_users():
+    usuarios.clear()
+    return usuarios
+    
