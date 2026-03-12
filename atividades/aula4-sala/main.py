@@ -161,3 +161,18 @@ async def send_html():
     </html>
 
 """
+
+class Usuario(BaseModel):
+    nome: str
+    idade: int
+
+usuarios = []
+
+@app.post("/users")
+async def create_user(usuario: Usuario):
+    usuarios.append(usuario)
+    return usuario
+
+@app.get("/users")
+async def read_users(index: int = -1):
+    if (usuarios.)
