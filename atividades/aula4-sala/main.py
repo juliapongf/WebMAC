@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
+from pydantic import BaseModel
+
 
 app = FastAPI()
 
@@ -175,4 +177,9 @@ async def create_user(usuario: Usuario):
 
 @app.get("/users")
 async def read_users(index: int = -1):
-    if (usuarios.)
+    if (index >= 0) {
+        return usuarios
+    }
+    else {
+        return usuarios[index]
+    }
