@@ -3,9 +3,9 @@
 ## Aplicativo de filmes
 
 ### Funcionalidades:
- - Adicionar séries ou filmes (com hx-post)
- - Busca de tarefas ou filmes, filtrados por "assistidos" e "para assistir no futuro", "filmes" ou "séries", por diretor ou por gênero (com hx-get)
- - Opção de modificar as informações sobre o filme/série, como descrição, gênero e se já foi assistido ou não (com hx-put)
+ - Adicionar filmes, diretores e atores (com hx-post)
+ - Busca de filmes, filtrados por "assistidos" e "para assistir", por diretor ou por gênero (com hx-get)
+ - Opção de modificar as informações sobre o filme, como descrição, gênero e se já foi assistido ou não (com hx-put)
  - Rankeamento por notas (com paginação)
  - Atualizar tarefas
  - Deletar filmes/séries (com hx-delete)
