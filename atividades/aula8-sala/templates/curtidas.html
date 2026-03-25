@@ -1,7 +1,24 @@
+<style>
+    #aba-curtidas {
+        background-color: rgb(240, 84, 175);
+    }
+    #aba-jupiter, #aba-prof {
+        background-color: rgb(209, 207, 207);
+    }
+</style>
+
 <div id="botoes">
     <div id="contador">
-        0
+        {{ contador }}
     </div>
-    <button id="curtir">Curtir</button>
-    <button id="retirar">Retirar curtidas</button>
+    <button id="curtir" hx-post="/curtir"
+                        hx-trigger="click"
+                        hx-target="#contador"
+                        hx-push-url="false">Curtir</button>
+    <button id="retirar" hx-delete="/curtir"
+                        hx-trigger="click"
+                        hx-target="#contador"
+                        hx-push-url="false"
+                        hx-confirm="Tem certeza que deseja deletar as curtidas?"
+                        >Retirar curtidas</button>
 </div>

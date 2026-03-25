@@ -1,28 +1,124 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Prof. Dr. Roberto M. Cesar Jr. - USP</title>
-    <link rel="stylesheet" href="/static/general_styles.css">
-</head>
-<body>
+<div class="body2">
 
-    <nav>
-        <a href="index.html" class="nav-link">Index</a>
-        <a href="biography.html" class="nav-link">Biography</a>
-        <a href="students.html" class="nav-link">Past Students and Postdocs</a>
+    <style>
+    .body2 {
+        font-family: sans-serif; margin: 2em; line-height: 1.6;
+        margin: 0;
+        position: relative;
+    }
+    .nav2, .main2 {
+        display: flex;
+        flex-direction: column;
+    }
+    .main2 {
+        align-items: center;
+        margin: 0px 0px 0px 300px;
+    }
+    .header2 {
+        margin: 0;
+        background-color: #b18a63;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .nav2 {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        width: 300px;
+        background-color: #694520;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .nav-link {
+        display: block;
+        width: 100%;
+        line-height: 40px;
+        background-color: #938dbb;
+        text-align: center;
+        margin: 10px 0px;
+        transition: line-height 0.15s;
+        text-decoration: none;
+        color: black;
+    }
+
+    .nav-link:hover {
+        line-height: 50px;
+        cursor: pointer;
+    }
+
+    .main-info {
+        margin: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .main-info-box {
+        width: 90%;
+        border: 2px solid #2a2a2a;
+        padding: 30px;
+        margin: 30px 0px;
+    }
+    .img2 {
+        max-width: 500px;
+        width: 100%;
+        border-radius: 50%;
+    }
+
+
+    @media (max-width: 800px) {
+        .nav2 {
+            position: relative;
+            display: block;
+            width: 100%;
+        }
+        .main2 {
+            margin-left: 0;
+        }
+    }
+
+
+    .h1-1, h2 {
+        color: #5042ac;
+        text-align: center;
+    }
+    ul {
+        margin-top: 0;
+    }
+    li::marker {
+        color: #5042ac;
+    }
+    hr {
+        margin: 2em 0;
+    }
+
+    #aba-prof {
+        background-color: rgb(240, 84, 175);
+    }
+    #aba-jupiter, #aba-curtidas {
+        background-color: rgb(209, 207, 207);
+    }
+</style>
+
+    <nav class="nav2">
+        <a class="nav-link">Index</a>
+        <a class="nav-link">Biography</a>
+        <a class="nav-link">Past Students and Postdocs</a>
         <a href="https://www.valor.com.br/cultura/6322823/elizabeth-ii-e-akihito-sao-exemplos-do-aumento-da-longevidade-e-da-melhoria-da-qualidade-fisica" class="nav-link">News</a>
-        <a href="links.html" class="nav-link">Links</a>
+        <a class="nav-link">Links</a>
     </nav>
 
-    <main>
-        <header>
-            <img src="https://www.ime.usp.br/~cesar/index_files/image003.jpg" alt="Roberto M. Cesar Jr." width="512">
+    <main class="main2">
+        <header class="header2">
+            <img class="img2" src="https://www.ime.usp.br/~cesar/index_files/image003.jpg" alt="Roberto M. Cesar Jr." width="512">
         </header>
     
         <div class="main-info">
             <div class="main-info-box">
-                <h1>Prof. Dr. Roberto M. Cesar Jr.</h1>
+                <h1 class="h1-1">Prof. Dr. Roberto M. Cesar Jr.</h1>
                 <strong>Full Professor</strong>
                 <br>
                 Department of Computer Science, IME-USP<br>
@@ -60,20 +156,4 @@
     </main>
 
 
-<!--
-
-
-
-
-  
-  <h2>News</h2>
-  <p><a href="https://www.valor.com.br/cultura/6322823/elizabeth-ii-e-akihito-sao-exemplos-do-aumento-da-longevidade-e-da-melhoria-da-qualidade-fisica">Valor Econômico article on science and society</a></p>
-
-
-  
-
-
-
-  -->
-</body>
-</html>
+</div>

@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jupiterweb</title>
+
     <style>
-        body {
+        .body1 {
             font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
         }
 
-        header {
+        .header1 {
             display: flex;
         }
 
@@ -29,13 +24,13 @@
             width: 100%;
         }
 
-        main {
+        .main1 {
             margin: 20px 0px;
             padding: 0;
             display: flex;
             justify-content: space-between;
         }
-        nav {
+        .nav1 {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -129,6 +124,13 @@
             color: olive;
         }
 
+        #aba-jupiter {
+            background-color: rgb(240, 84, 175);
+        }
+        #aba-curtidas, #aba-prof {
+            background-color: rgb(209, 207, 207);
+        }
+
         @media (max-width: 600px) {
             main {
                 flex-direction: column;
@@ -147,9 +149,9 @@
 
     
     </style>
-</head>
-<body>
-    <header>
+
+<div class="body1">
+    <header class="header1">
         <div></div>
         <img style="width: 130px; margin-left: 20px; margin-bottom: 10px;" src="https://uspdigital.usp.br/comumwebdev/imagens/cabecalho/usp-logo.png">
         <img style="width: 260px; margin-left: 30px; margin-bottom: 5px;" src="https://uspdigital.usp.br/comumwebdev/imagens/cabecalho/usp-logo-texto.png">
@@ -159,8 +161,8 @@
     <div id="line2"></div>
     <div id="line3"></div>
 
-    <main>
-        <nav>
+    <main class="main1">
+        <nav class="nav1">
             <div class="nav-box">
                 <div class="nav-box-top">Público</div>
                 <a class="nav-buttons" href="https://uspdigital.usp.br/jupiterweb/jupArquivosPublicos.jsp?tiparq=9&anoprg=2026&codmnu=6863">Calendário Escolar</a>
@@ -194,5 +196,4 @@
         </div>
     </main>
     
-</body>
-</html>
+</div>

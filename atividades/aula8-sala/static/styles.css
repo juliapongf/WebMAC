@@ -1,4 +1,10 @@
-header {
+.headerr {
     background-color: pink;
     border: 3px solid black;
+}
+#aba-curtidas {
+    background-color: rgb(240, 84, 175);
+}
+#aba-jupiter, #aba-prof {
+    background-color: rgb(209, 207, 207);
 }
