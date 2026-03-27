@@ -19,7 +19,6 @@ url_sqlite = f"sqlite:///{arquivo_sqlite}"
 
 engine = create_engine(url_sqlite)
 
-#templates = Jinja2Templates(directory=["Templates", "Templates/Partials"])
 templates = Jinja2Templates(directory="Templates")
 
 def create_db_and_tables():
