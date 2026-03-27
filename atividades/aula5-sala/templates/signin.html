@@ -1,13 +1,29 @@
-{% extends "layout.html" %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício da Aula 5</title>
+</head>
+<body>
+    <header>
+        <h1>Exercício da Aula 5</h1>
+    </header>
+    <main>
+        <form hx-post="/users"
+                hx-trigger="submit"
+                hx-target="#mensagem"
+                hx-swap="innerHTML"
+                hx-ext="json-enc">
+            <h3> Crie um usuário</h3>
+            Nome <input type="text">
+            Senha <input type="password">
+            Biografia <input type="textarea">
+            <input type="submit" value="Registrar">
+        </form>
 
-{% block conteudo %}
-
-<form>
-    <h3> Crie um usuário</h3>
-    Nome <input type="text">
-    Senha <input type="password">
-    Biografia <input type="textarea">
-    <button class="botao">Registrar</button>
-</form>
-
-{% endblock %}
+        <div id="mensagem"></div>
+    </main>
+    
+</body>
+</html>
