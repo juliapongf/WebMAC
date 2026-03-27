@@ -10,18 +10,42 @@
         <h1>Exercício da Aula 5</h1>
     </header>
     <main>
-        <form hx-post="/users"
-                hx-trigger="submit"
-                hx-target="#mensagem"
-                hx-swap="innerHTML"
-                hx-ext="json-enc">
+        <form id="fazer-login">
             <h3> Faça log in</h3>
-            Nome <input type="text" name="username">
-            Senha <input type="password" name="password">
+            Nome <input type="text" id="nome" name="nome">
+            Senha <input type="password" id="senha" name="senha">
             <input type="submit" value="Entrar">
         </form>
         <div id="mensagem"></div>
     </main>
+
+    <script>
+        document.getElementById("fazer-login").addEventListener("submit", async (e) => {
+            e.preventDefault();
+        
+            const dados = {
+                nome: document.getElementById('nome').value,
+                senha: document.getElementById('senha').value,
+            };
+        
+            const resposta = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dados)
+            });
+        
+            const mensagem = document.getElementById("mensagem");
+        
+            if (resposta.ok) {
+                const resultado = await resposta.json();
+                mensagem.innerText = "Usuário " + resultado.usuario + " logado!";
+            } else {
+                mensagem.innerText = "Erro ao logar!";
+            }
+        });
+    </script>
     
 </body>
 </html>

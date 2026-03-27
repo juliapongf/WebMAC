@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
     <title>Exercício da Aula 5</title>
 </head>
 <body>
@@ -10,20 +12,46 @@
         <h1>Exercício da Aula 5</h1>
     </header>
     <main>
-        <form hx-post="/users"
-                hx-trigger="submit"
-                hx-target="#mensagem"
-                hx-swap="innerHTML"
-                hx-ext="json-enc">
+        <form id="cria-usuario">
             <h3> Crie um usuário</h3>
-            Nome <input type="text">
-            Senha <input type="password">
-            Biografia <input type="textarea">
+            Nome <input type="text" id="nome" name="nome">
+            Senha <input type="password" id="senha" name="senha">
+            Biografia <textarea id="bio" name="bio"></textarea>
             <input type="submit" value="Registrar">
         </form>
 
         <div id="mensagem"></div>
     </main>
+
+    <script>
+        document.getElementById("cria-usuario").addEventListener("submit", async (e) => {
+            e.preventDefault();
+        
+            const dados = {
+                nome: document.getElementById('nome').value,
+                senha: document.getElementById('senha').value,
+                bio: document.getElementById('bio').value
+            };
+        
+            const resposta = await fetch('/users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dados)
+            });
+        
+            const mensagem = document.getElementById("mensagem");
+        
+            if (resposta.ok) {
+                const resultado = await resposta.json();
+                mensagem.innerText = "Usuário " + resultado.usuario + " criado!";
+            } else {
+                mensagem.innerText = "Erro ao enviar!";
+            }
+        });
+    </script>
+
     
 </body>
 </html>
