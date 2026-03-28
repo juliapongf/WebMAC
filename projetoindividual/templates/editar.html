@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block conteudo %}
+    <div class="subheader"> Editar minhas listas </div>
+    <nav class="nav2">
+        <button class="nav2-link"
+            hx-get="/editar/filmes"
+            hx-target=".caixa1"
+            hx-trigger="click"
+        > Filmes </button>
+        <button class="nav2-link"
+            hx-get="/editar/filmes"
+            hx-target=".caixa1"
+            hx-trigger="click"
+        > Atores </button>
+        <button class="nav2-link"
+            hx-get="/editar/filmes"
+            hx-target=".caixa1"
+            hx-trigger="click"
+        > Diretores </button>
+
+    </nav>
+    <div class="caixa1"
+         hx-get="{{ pagina }}"
+         hx-target=".caixa1"
+         hx-trigger="load"
+         hx-push-url="true">
+    </div>
+{% endblock %}
