@@ -1,6 +1,7 @@
 body {
     margin: 0;
     background-color: black;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .body1 {
@@ -11,7 +12,7 @@ body {
 .nav1 {
     display: flex;
     flex-direction: column;
-    margin: 50px 0px;
+    margin: 50px 0px 0px 15px;
     width: 200px;
 }
 
@@ -23,6 +24,22 @@ body {
     height: 40px;
     border-radius: 10px;
     line-height: 40px;
+    transition: height 0.15s, opacity 0.15s, line-height 0.15s;
+}
+
+.nav1-link:hover, .nav2-link:hover {
+    opacity: 90%;
+    cursor: pointer;
+}
+
+.nav1-link:hover {
+    height: 50px;
+    line-height: 50px;
+}
+
+.nav2-link:hover {
+    height: 50px;
+    line-height: 50px;
 }
 
 main {
@@ -33,9 +50,17 @@ main {
 }
 
 header {
-    height: 150px;
+    padding: 20px 0px;
     font-size: 100px;
-    line-height: 150px;;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+}
+
+img {
+    height: 150px;
 }
 
 header, .subheader {
@@ -49,9 +74,107 @@ header, .subheader {
     margin: 40px;
     font-size: 40px;
     border-radius: 20px;
+    padding: 20px 10px;
+}
+
+.nav2 {
+    border-bottom: 5px solid white;
+    width: 80%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    justify-content: space-around;
+}
+
+.nav2-link {
+    background-color: white;
+    color: black;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-bottom: 0;
+    height: 40px;
+    width: 28%;
+    border: none;
+}
+
+.caixa1 {
+    padding: 40px 0px;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .caixinha {
     background-color: white;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    border-radius: 20px;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+input, select, textarea {
+    width: 60%;
+    border-radius: 10px;
+    min-height: 40px;
+    border: 2px solid rgb(201, 201, 201);
+    margin: 10px 0px;
+    padding: 1px 2px;
+}
+select {
+    width: 61%;
+}
+
+
+.form-field, .form-field-textarea {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+textarea {
+    resize: none;
+    height: 150px;
+}
+
+@media (max-width: 600px) {
+    header {
+        font-size: 50px;
+    }
+    .subheader {
+        font-size: 35px;
+    }
+    .body1 {
+        flex-direction: column;
+    }
+    .nav1 {
+        width: 90%;
+    }
+    img {
+        height: 100px;
+    }
+}
+
+@media (max-width: 400px) {
+    header {
+        font-size: 45px;
+    }
+    .subheader {
+        font-size: 30px;
+    }
+    img {
+        height: 55px;
+    }
 }
 
