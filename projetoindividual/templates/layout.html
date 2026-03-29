@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.js" integrity="sha384-ezjq8118wdwdRMj+nX4bevEi+cDLTbhLAeFF688VK8tPDGeLUe0WoY2MZtSla72F" crossorigin="anonymous"></script>
+    <script src="/static/script.js"></script>
     <title>O Cinéfilo</title>
 </head>
 <body>
-    <header>
+    <header class="mutavel">
         <img src="/static/camera.png">
         <div>O Cinéfilo </div>
         <img src="/static/pipoca.png">
     </header>
     <div class="body1">
         <nav class="nav1">
-            <a class="nav1-link">Editar minhas listas</a>
-            <a class="nav1-link">Pesquisar</a>
-            <a class="nav1-link">Configurações</a>
+            <a href="/editar" class="nav1-link mutavel">Editar minhas listas</a>
+            <a href="/pesquisar" class="nav1-link mutavel">Pesquisar</a>
+            <a href="/configurar" class="nav1-link mutavel">Configurações</a>
         </nav>
         <main>
             {% block conteudo %}{% endblock %}

@@ -1,0 +1,69 @@
+<style>
+    #aba-atores {
+        background-color: rgb(105, 105, 105);
+        color: white;
+        height: 50px;
+        line-height: 50px;
+    }
+    #aba-filmes, #aba-diretores {
+        background-color: white;
+        color: black;
+    }
+</style>
+
+<div class="caixinha">
+    <h2>Adicionar um ator</h2>
+
+    <form>
+        <div class="form-field" >    
+            <label for="nome">Nome:</label>     
+            <input type="text" name="nome">
+        </div>
+        <div class="form-field-textarea" >    
+            <label for="biografia">Biografia:</label>     
+            <textarea maxlength="2048" name="biografia"></textarea>
+        </div>
+        <div class="form-field-button" >    
+            <button class="form-button mutavel" type="submit">Adicionar</button>
+        </div>
+    </form>
+
+</div>
+
+<div class="caixinha">
+    <h2>Atualizar dados de um ator</h2>
+
+    <form>
+        <div class="form-field" >    
+            <label for="id">ID do ator:</label>     
+            <input type="number" name="id">
+        </div>
+        <div class="form-field" >
+            <label for="campo">Campo a ser atualizado:</label>       
+            <select name="campo">
+                <option value="nome">Nome</option>
+                <option value="biografia">Biografia</option>
+            </select>
+        </div>
+        <div id="atualizar-diretor"></div>
+        <div class="form-field-button" >    
+            <button class="form-button mutavel" type="submit">Atualizar</button>
+        </div>
+    </form>
+
+
+</div>
+
+<div class="caixinha">
+    <h2>Excluir um ator</h2>
+    <form>
+        <div class="form-field" >    
+            <label for="id">ID do ator:</label>     
+            <input type="number" name="id">
+        </div>
+        <div class="form-field-button" >    
+            <button class="form-button mutavel" type="submit">Excluir</button>
+        </div>
+
+    </form>
+</div>

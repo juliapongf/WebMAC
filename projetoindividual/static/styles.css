@@ -25,19 +25,60 @@ body {
     border-radius: 10px;
     line-height: 40px;
     transition: height 0.15s, opacity 0.15s, line-height 0.15s;
+    font-size: 18px;
+    text-decoration: none;
 }
 
-.nav1-link:hover, .nav2-link:hover {
-    opacity: 90%;
-    cursor: pointer;
-}
-
-.nav1-link:hover {
+.nav2 {
+    border-bottom: 5px solid white;
+    width: 80%;
     height: 50px;
-    line-height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    justify-content: space-around;
 }
 
-.nav2-link:hover {
+.nav2-link {
+    background-color: white;
+    color: black;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-bottom: 0;
+    height: 40px;
+    width: 28%;
+    border: none;
+    font-size: 18px;
+}
+
+.form-field-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-button {
+    width: 40%;
+    font-size: 18px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    transition: height 0.15s, opacity 0.15s, line-height 0.15s;
+}
+
+.button-settings {
+    width: 80%;
+    height: 40px;
+    border: none;
+    margin: 10px 0px;
+    border-radius: 15px;
+    color: white;
+    font-size: 18px;
+}
+
+.nav1-link:hover, .nav2-link:hover, .form-button:hover, .button-settings:hover {
+    opacity: 80%;
+    cursor: pointer;
     height: 50px;
     line-height: 50px;
 }
@@ -63,7 +104,7 @@ img {
     height: 150px;
 }
 
-header, .subheader {
+header, .subheader, .form-button {
     background-color: rgb(234, 0, 179);
     color: white;
     text-align: center;
@@ -77,26 +118,6 @@ header, .subheader {
     padding: 20px 10px;
 }
 
-.nav2 {
-    border-bottom: 5px solid white;
-    width: 80%;
-    height: 50px;
-    display: flex;
-    flex-direction: row;
-    align-items: end;
-    justify-content: space-around;
-}
-
-.nav2-link {
-    background-color: white;
-    color: black;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    margin-bottom: 0;
-    height: 40px;
-    width: 28%;
-    border: none;
-}
 
 .caixa1 {
     padding: 40px 0px;
@@ -114,6 +135,7 @@ header, .subheader {
     align-items: center;
     padding: 30px;
     border-radius: 20px;
+    margin: 20px 0px;
 }
 
 form {
@@ -143,12 +165,15 @@ select {
     justify-content: space-between;
 }
 
+
 textarea {
     resize: none;
     height: 150px;
 }
 
-@media (max-width: 600px) {
+
+
+@media (max-width: 660px) {
     header {
         font-size: 50px;
     }
@@ -166,6 +191,7 @@ textarea {
     }
 }
 
+
 @media (max-width: 400px) {
     header {
         font-size: 45px;
@@ -175,6 +201,22 @@ textarea {
     }
     img {
         height: 55px;
+    }
+
+    .nav1-link, .nav2-link {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 280px) {
+    header {
+        font-size: 30px;
+    }
+    .subheader {
+        font-size: 20px;
+    }
+    img {
+        height: 40px;
     }
 }
 

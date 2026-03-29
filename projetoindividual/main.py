@@ -27,3 +27,23 @@ async def pagina_filmes(request: Request, response_class=HTMLResponse):
         return templates.TemplateResponse(request, "editar.html", {"pagina": "/editar/filmes"})
     return templates.TemplateResponse(request, "filmes.html")
 
+@app.get("/editar/ator")
+async def pagina_filmes(request: Request, response_class=HTMLResponse):
+    if (not "HX-Request" in request.headers):
+        return templates.TemplateResponse(request, "editar.html", {"pagina": "/editar/filmes"})
+    return templates.TemplateResponse(request, "atores.html")
+
+@app.get("/editar/diretor")
+async def pagina_filmes(request: Request, response_class=HTMLResponse):
+    if (not "HX-Request" in request.headers):
+        return templates.TemplateResponse(request, "editar.html", {"pagina": "/editar/filmes"})
+    return templates.TemplateResponse(request, "diretores.html")
+
+@app.get("/pesquisar")
+async def pagina_pesquisar(request: Request, response_class=HTMLResponse):
+    return templates.TemplateResponse(request, "pesquisar.html")
+
+@app.get("/configurar")
+async def pagina_configurar(request: Request, response_class=HTMLResponse):
+    return templates.TemplateResponse(request, "configurar.html")
+

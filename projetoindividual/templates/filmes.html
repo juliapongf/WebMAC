@@ -1,3 +1,16 @@
+<style>
+    #aba-filmes {
+        background-color: rgb(105, 105, 105);
+        color: white;
+        height: 50px;
+        line-height: 50px;
+    }
+    #aba-atores, #aba-diretores {
+        background-color: white;
+        color: black;
+    }
+</style>
+
 <div class="caixinha">
     <h2>Adicionar um filme</h2>
 
@@ -25,6 +38,52 @@
             <label for="resenha">Resenha:</label>     
             <textarea maxlength="2048" name="resenha"></textarea>
         </div>
+        <div class="form-field-button" >    
+            <button class="form-button mutavel" type="submit">Adicionar</button>
+        </div>
+
     </form>
 
+</div>
+
+<div class="caixinha">
+    <h2>Atualizar dados de um filme</h2>
+
+    <form>
+        <div class="form-field" >    
+            <label for="id">ID do filme:</label>     
+            <input type="number" name="id">
+        </div>
+        <div class="form-field" >
+            <label for="campo">Campo a ser atualizado:</label>       
+            <select name="campo">
+                <option value="titulo">Título</option>
+                <option value="ano">Ano</option>
+                <option value="lista">Lista</option>
+                <option value="nota">Nota</option>
+                <option value="resenha">Resenha</option>
+            </select>
+        </div>
+        <div id="atualizar-filme"></div>
+        <div class="form-field-button" >    
+            <button class="form-button mutavel" type="submit">Atualizar</button>
+        </div>
+    </form>
+
+
+</div>
+
+<div class="caixinha">
+    <h2>Excluir um filme</h2>
+
+    <form>
+        <div class="form-field" >    
+            <label for="id">ID do filme:</label>     
+            <input type="number" name="id">
+        </div>
+        <div class="form-field-button" >    
+            <button class="form-button mutavel" type="submit">Excluir</button>
+        </div>
+
+    </form>
 </div>

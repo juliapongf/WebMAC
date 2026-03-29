@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block conteudo %}
+    <div class="subheader mutavel"> Pesquisar </div>
+
+    <div class="caixa1">
+        <div class="caixinha">
+
+            <h2> Fazer pesquisa </h2>
+
+            <form>
+                <label for="campo1">Escolha o que pesquisar:</label>       
+                <select name="campo1">
+                    <option value="filme">Filme</option>
+                    <option value="ator">Ator</option>
+                    <option value="diretor">Diretor</option>
+                </select>
+                <label for="campo2">(Caso seja filme) Escolha a lista a pesquisar:</label>       
+                <select name="campo2">
+                    <option value="ambas">Ambas</option>
+                    <option value="favoritos">Favoritos</option>
+                    <option value="para-assistir">Para Assistir</option>
+                </select>
+                <label for="campo3">(Caso seja filme) Ordenar resultados por:</label>       
+                <select name="campo3">
+                    <option value="alfabetico">Ordem alfabética</option>
+                    <option value="nota">Nota</option>
+                </select>
+                <label for="campo4">Digite sua pesquisa</label>
+                <input type="text" name="campo4">
+                <div class="form-field-button" >    
+                    <button class="form-button mutavel" type="submit">Pesquisar</button>
+                </div>
+
+            </form>
+    
+        </div>
+    
+        <div class="subheader mutavel"> Resultados </div>
+    
+        <div class="caixa2">
+            Resultados da pesquisa
+        </div>
+
+    </div>
+
+{% endblock %}

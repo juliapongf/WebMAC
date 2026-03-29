@@ -1,22 +1,25 @@
 {% extends "layout.html" %}
 
 {% block conteudo %}
-    <div class="subheader"> Editar minhas listas </div>
+    <div class="subheader mutavel"> Editar minhas listas </div>
     <nav class="nav2">
         <button class="nav2-link"
             hx-get="/editar/filmes"
             hx-target=".caixa1"
             hx-trigger="click"
+            id="aba-filmes"
         > Filmes </button>
         <button class="nav2-link"
-            hx-get="/editar/filmes"
+            hx-get="/editar/ator"
             hx-target=".caixa1"
             hx-trigger="click"
+            id="aba-atores"
         > Atores </button>
         <button class="nav2-link"
-            hx-get="/editar/filmes"
+            hx-get="/editar/diretor"
             hx-target=".caixa1"
             hx-trigger="click"
+            id="aba-diretores"
         > Diretores </button>
 
     </nav>
