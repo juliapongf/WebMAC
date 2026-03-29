@@ -171,6 +171,15 @@ textarea {
     height: 150px;
 }
 
+.mensagem {
+    border: none;
+    opacity: 50%;
+    color: white;
+    background-color: rgb(234, 0, 179);
+    font-size: 14px;
+    line-height: 8px;
+}
+
 
 
 @media (max-width: 660px) {

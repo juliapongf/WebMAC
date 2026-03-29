@@ -14,25 +14,26 @@
 <div class="caixinha">
     <h2>Adicionar um filme</h2>
 
-    <form>
+    <form hx-post="/novoFilme"
+          hx-target="#mensagem1">
         <div class="form-field" >    
             <label for="titulo">Título:</label>     
-            <input type="text" name="titulo">
+            <input type="text" name="titulo" required>
         </div>
         <div class="form-field" >    
             <label for="ano">Ano:</label>     
-            <input type="number" name="ano">
+            <input type="number" name="ano" required>
         </div>
         <div class="form-field" >
             <label for="lista">Adicionar na lista:</label>       
-            <select name="lista">
+            <select name="lista" required>
                 <option value="Favoritos">Favoritos</option>
                 <option value="Para assistir">Para assistir</option>
             </select>
         </div>
-        <div class="form-field" >    
+        <div class="form-field">    
             <label for="nota">Nota:</label>     
-            <input type="number" name="nota">
+            <input type="number" name="nota" required>
         </div>
         <div class="form-field-textarea" >    
             <label for="resenha">Resenha:</label>     
@@ -43,6 +44,8 @@
         </div>
 
     </form>
+
+    <div class="mensagem mutavel" id="mensagem1"></div>
 
 </div>
 
@@ -69,14 +72,54 @@
             <button class="form-button mutavel" type="submit">Atualizar</button>
         </div>
     </form>
+    <div class="mensagem mutavel" id="mensagem2"></div>
+</div>
 
+<div class="caixinha">
+    <h2>Adicionar diretores e atores de um filme</h2>
+
+    <h3>Adicionar diretor</h3>
+    <form hx-post="/novaDirecao"
+          hx-target="#mensagem3">
+        <div class="form-field" >    
+            <label for="idfilme">ID do filme:</label>     
+            <input type="number" name="idfilme">
+        </div>
+        <div class="form-field" >    
+            <label for="iddiretor">ID do diretor:</label>     
+            <input type="number" name="iddiretor">
+        </div>
+        <div class="form-field-button" >    
+            <button class="form-button mutavel" type="submit">Adicionar</button>
+        </div>
+    </form>
+
+    <div class="mensagem mutavel" id="mensagem3"></div>
+
+    <h3>Adicionar ator</h3>
+    <form hx-post="/novaAtuacao"
+          hx-target="#mensagem4">
+        <div class="form-field" >    
+            <label for="idfilme">ID do filme:</label>     
+            <input type="number" name="idfilme">
+        </div>
+        <div class="form-field" >    
+            <label for="idator">ID do ator:</label>     
+            <input type="number" name="idator">
+        </div>
+        <div class="form-field-button" >    
+            <button class="form-button mutavel" type="submit">Adicionar</button>
+        </div>
+    </form>
+    <div class="mensagem mutavel" id="mensagem4"></div>
 
 </div>
 
 <div class="caixinha">
     <h2>Excluir um filme</h2>
 
-    <form>
+    <form hx-delete="/deletaFilme"
+          hx-target="#mensagem5">
         <div class="form-field" >    
             <label for="id">ID do filme:</label>     
             <input type="number" name="id">
@@ -86,4 +129,6 @@
         </div>
 
     </form>
+
+    <div class="mensagem mutavel" id="mensagem5"></div>
 </div>

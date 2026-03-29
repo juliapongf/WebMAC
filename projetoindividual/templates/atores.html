@@ -14,10 +14,11 @@
 <div class="caixinha">
     <h2>Adicionar um ator</h2>
 
-    <form>
+    <form hx-post="/novoAtor"
+          hx-target="#mensagem1">
         <div class="form-field" >    
             <label for="nome">Nome:</label>     
-            <input type="text" name="nome">
+            <input type="text" name="nome" required>
         </div>
         <div class="form-field-textarea" >    
             <label for="biografia">Biografia:</label>     
@@ -27,7 +28,7 @@
             <button class="form-button mutavel" type="submit">Adicionar</button>
         </div>
     </form>
-
+    <div class="mensagem mutavel" id="mensagem1"></div>
 </div>
 
 <div class="caixinha">
@@ -45,18 +46,39 @@
                 <option value="biografia">Biografia</option>
             </select>
         </div>
-        <div id="atualizar-diretor"></div>
         <div class="form-field-button" >    
             <button class="form-button mutavel" type="submit">Atualizar</button>
         </div>
     </form>
 
+    <div class="mensagem mutavel" id="mensagem2"></div>
+</div>
+
+<div class="caixinha">
+    <h2>Adicionar filmes de um ator</h2>
+
+    <form hx-post="/novaAtuacao"
+          hx-target="#mensagem3">
+        <div class="form-field" >    
+            <label for="idfilme">ID do filme:</label>     
+            <input type="number" name="idfilme">
+        </div>
+        <div class="form-field" >    
+            <label for="idator">ID do ator:</label>     
+            <input type="number" name="idator">
+        </div>
+        <div class="form-field-button" >    
+            <button class="form-button mutavel" type="submit">Adicionar</button>
+        </div>
+    </form>
+    <div class="mensagem mutavel" id="mensagem3"></div>
 
 </div>
 
 <div class="caixinha">
     <h2>Excluir um ator</h2>
-    <form>
+    <form hx-delete="/deletaAtor"
+          hx-target="#mensagem4">
         <div class="form-field" >    
             <label for="id">ID do ator:</label>     
             <input type="number" name="id">
@@ -66,4 +88,5 @@
         </div>
 
     </form>
+    <div class="mensagem mutavel" id="mensagem4"></div>
 </div>

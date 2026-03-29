@@ -1,0 +1,57 @@
+{% if campo1 == "filme" %}
+    {% for item in resultados %}
+        <div class="caixinha">
+            <ul>
+                <li>Título: {{ item.titulo }}</li>
+                <li>Ano: {{ item.ano }}</li>
+                <li>Lista: {{ item.lista }}</li>
+                <li>Nota: {{ item.nota }}</li>
+                <li>
+                    Diretor(es): |
+                    {% for diretor in item.diretores %}
+                        {{ diretor.nome }} |
+                    {% endfor %}
+                </li>
+                <li>
+                    Ator(es): |
+                    {% for ator in item.atores %}
+                        {{ ator.nome }} |
+                    {% endfor %}
+                </li>
+                <li>Resenha:</li>
+            </ul>
+            <p>{{ item.resenha }}</p>    
+
+        </div>
+    {% endfor%}
+
+{% else %}
+    {% for item in resultados %}
+    <div class="caixinha">
+        <ul>
+            <li>Nome: {{ item.titulo }}</li>
+            <li>
+                Filme(s): | 
+                {% for filme in item.filmes %}
+                    {{ filme.titulo }} |
+                {% endfor %}
+            </li>
+            <li>Biografia:</li>
+        </ul>
+        <p>{{ item.biografia }}</p>    
+
+    </div>
+    {% endfor%}
+
+{% endif %}
+
+{% if temanterior %}
+<button hx-get="/pesquisar?busca={{ busca }}&campo1={{ campo1 }}&campo2={{ campo2 }}&pagina={{ pagina - 1 }}"
+    hx-target="#caixa2"
+    >Anterior</button>
+{% endif%}
+{% if temproximo %}
+<button hx-get="/pesquisar?busca={{ busca }}&campo1={{ campo1 }}&campo2={{ campo2 }}&pagina={{ pagina + 1 }}"
+    hx-target="#caixa2">
+    Próximo</button>
+{% endif %}

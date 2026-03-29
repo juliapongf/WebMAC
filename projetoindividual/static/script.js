@@ -18,9 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.button-settings').forEach(botao => {
         botao.onclick = () => {
             localStorage.setItem('cor', botao.dataset.cor);
-            document.querySelectorAll('.mutavel').forEach(item => {
-                item.style.backgroundColor = botao.dataset.cor;
-            });
+            mudar_cor();
         };
     });
 });
