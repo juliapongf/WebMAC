@@ -5,6 +5,7 @@ from fastapi.templating import Jinja2Templates
 from sqlmodel import Session, select, SQLModel, create_engine
 from models import *
 from typing import List, Optional
+from sqlalchemy import func
 
 
 #Criando a engine do banco de dados
@@ -83,7 +84,7 @@ async def pagina_configurar(request: Request, response_class=HTMLResponse):
 ##### Criação de itens no banco de dados #####
 
 @app.post("/novoFilme", response_class=HTMLResponse)
-def criar_filme(titulo: str = Form(...), ano: int = Form(...), lista: str = Form(...), nota: int = Form(...), resenha: Optional[str] = Form(None)):
+def criar_filme(titulo: str = Form(...), ano: int = Form(...), lista: str = Form(...), nota: Optional[int] = Form(None), resenha: Optional[str] = Form(None)):
     with Session(engine) as session:
         novo_filme = Filme(titulo=titulo, ano=ano, lista=lista, nota=nota, resenha=resenha)
         session.add(novo_filme)
@@ -200,7 +201,7 @@ def deletar_direcao(idfilme: int, iddiretor: int):
 @app.delete("/deletaAtuacao", response_class=HTMLResponse)
 def deletar_atuacao(idfilme: int, idator: int):
     with Session(engine) as session:
-        query = select(Direcao).where(Atuacao.filme_id == idfilme, Atuacao.ator_id == idator)
+        query = select(Atuacao).where(Atuacao.filme_id == idfilme, Atuacao.ator_id == idator)
         atuacao = session.exec(query).first()
         if (not atuacao):
             return HTMLResponse(content="<p>Ator/atriz já não fazia parte desse filme!</p>")
@@ -210,7 +211,7 @@ def deletar_atuacao(idfilme: int, idator: int):
         ator = session.exec(query3).first()
         session.delete(atuacao)
         session.commit()
-        return HTMLResponse(content=f"<p>O(a) diretor(a) {ator.nome} não participou do filme {filme.titulo}!</p>")
+        return HTMLResponse(content=f"<p>O(a) ator/atriz {ator.nome} não participou do filme {filme.titulo}!</p>")
     
 
 ##### Busca de itens no banco de dados #####
@@ -221,7 +222,7 @@ def buscar_filmes(busca, lista, pagina):
     limite = 3
     with Session(engine) as session:
         if (lista == "ambas"): # Seleciona filmes de ambas as listas
-            query = select(Filme).where((Filme.titulo).contains(busca)).order_by(Filme.titulo)
+            query = select(Filme).where((Filme.titulo).contains(busca)).order_by(func.lower(Filme.titulo))
         else: # Seleciona filmes de apenas uma das listas, "Favoritos" ou "Para assistir"
             query = select(Filme).where(Filme.lista == lista, (Filme.titulo).contains(busca)).order_by(Filme.titulo)
         filmes = session.exec(query).all()
@@ -262,7 +263,7 @@ def buscar_filmes(busca, lista, pagina):
 def buscar_diretores(busca, pagina):
     limite=3
     with Session(engine) as session:
-        query = select(Diretor).where((Diretor.nome).contains(busca)).order_by(Diretor.nome)
+        query = select(Diretor).where((Diretor.nome).contains(busca)).order_by(func.lower(Diretor.nome))
         diretores = session.exec(query).all()
 
         # Implementando paginação
@@ -295,7 +296,7 @@ def buscar_diretores(busca, pagina):
 def buscar_atores(busca, pagina):
     limite=3
     with Session(engine) as session:
-        query = select(Ator).where((Ator.nome).contains(busca)).order_by(Ator.nome)
+        query = select(Ator).where((Ator.nome).contains(busca)).order_by(func.lower(Ator.nome))
         atores = session.exec(query).all()
 
         # Implementando paginação
@@ -379,4 +380,45 @@ def atualizar_filme(id: int = Form(...), campo: str = Form(...), novoTitulo: Opt
             filme.resenha = novaResenha
             session.commit()
             session.refresh(filme)
-            return HTMLResponse(content=f"<p>A resenha do filme {filme.titulo} foi atualizado de {resenhaAntiga} para {filme.resenha}!</p>")
+            return HTMLResponse(content=f"<p>A resenha do filme {filme.titulo} foi atualizada!</p>")
+        
+
+@app.put("/atualizaDiretor", response_class=HTMLResponse)
+def atualizar_diretor(id: int = Form(...), campo: str = Form(...), novoNome: Optional[str] = Form(None), novaBiografia: Optional[str] = Form(None)):
+    with Session(engine) as session:
+        query = select(Diretor).where(Diretor.id == id)
+        diretor = session.exec(query).first()
+        if (not diretor):
+            return HTMLResponse(content="<p>Diretor(a) não encontrado(a)!</p>")
+        
+        if (campo == "nome"):
+            nomeAntigo = diretor.nome
+            diretor.nome = novoNome
+            session.commit()
+            session.refresh(diretor)
+            return HTMLResponse(content=f"<p>O nome do(a) diretor(a) {nomeAntigo} foi atualizado para {diretor.nome}!</p>")
+        else:
+            diretor.biografia = novaBiografia
+            session.commit()
+            session.refresh(diretor)
+            return HTMLResponse(content=f"<p>A biografia do(a) diretor(a) {diretor.nome} foi atualizada!</p>")
+        
+@app.put("/atualizaAtor", response_class=HTMLResponse)
+def atualizar_ator(id: int = Form(...), campo: str = Form(...), novoNome: Optional[str] = Form(None), novaBiografia: Optional[str] = Form(None)):
+    with Session(engine) as session:
+        query = select(Ator).where(Ator.id == id)
+        ator = session.exec(query).first()
+        if (not ator):
+            return HTMLResponse(content="<p>Ator/atriz não encontrado(a)!</p>")
+        
+        if (campo == "nome"):
+            nomeAntigo = ator.nome
+            ator.nome = novoNome
+            session.commit()
+            session.refresh(ator)
+            return HTMLResponse(content=f"<p>O nome do(a) ator/atriz {nomeAntigo} foi atualizado para {ator.nome}!</p>")
+        else:
+            ator.biografia = novaBiografia
+            session.commit()
+            session.refresh(ator)
+            return HTMLResponse(content=f"<p>A biografia do(a) diretor(a) {ator.nome} foi atualizada!</p>")

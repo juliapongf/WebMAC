@@ -1,7 +1,12 @@
 <!-- HTML PARCIAL COM OS RESULTADOS DAS PESQUISAS, E QUE TAMBÉM IMPLEMENTA PAGINAÇÃO -->
 
+{% if not resultados %}
 
-{% if campo1 == "filme" %}
+    <div class="caixinha" style="align-items: start;">
+        <h3>Sem resultados!</h3>
+    </div>
+
+{% elif campo1 == "filme" %}
 
     {# HTML CASO A PESQUISA SEJA DE FILMES #}
 
@@ -12,7 +17,9 @@
                 <li>ID: {{ item.id }}</li>
                 <li>Ano: {{ item.ano }}</li>
                 <li>Lista: {{ item.lista }}</li>
-                <li>Nota: {{ item.nota }}</li>
+                {% if item.nota %}
+                    <li>Nota: {{ item.nota }}</li>
+                {% endif %}
                 {% if diretores[item.id] %}
                     <li>
                         Diretor(es): |
@@ -46,9 +53,9 @@
     {% for item in resultados %}
     <div class="caixinha" style="align-items: start;">
         {% if campo1 == "ator" %}
-            <h3>Ator: {{ item.nome }}</li>
+            <h3>Ator: {{ item.nome }}</h3>
         {% else %}
-            <h3>Diretor: {{ item.nome }}</li>
+            <h3>Diretor: {{ item.nome }}</h3>
         {% endif %}
         <ul>
             <li>ID: {{ item.id }}</li>

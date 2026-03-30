@@ -129,23 +129,23 @@
 
 <script>
     function mudar_campo(id, valor) {
-        let div = document.getElementById(id);
+        let div2 = document.getElementById(id);
         if (valor === 'nome') {
-            div.innerHTML = `
+            div2.innerHTML = `
             <label for="novoNome">Novo Nome:</label>     
             <input type="text" name="novoNome" required>
             `;
         }
         else {
-            div.innerHTML = `
+            div2.innerHTML = `
             <label for="novaBiografia">Nova Biografia:</label>     
             <textarea maxlength="2048" name="novaBiografia" required></textarea>
             `;        
         }
     }
 
-    let select = document.getElementById('atualizarAtor');
-    select.addEventListener('change', () => {
-        mudar_campo('atualizar-dado', select.value);
+    let select2 = document.getElementById('atualizarAtor');
+    select2.addEventListener('change', () => {
+        mudar_campo('atualizar-dado', select2.value);
     })
 </script>

@@ -96,7 +96,7 @@
             <input type="number" name="idfilme">
         </div>
         <div class="form-field" >    
-            <label for="iddiretor">ID do ator:</label>     
+            <label for="iddiretor">ID do diretor:</label>     
             <input type="number" name="iddiretor">
         </div>
         <div class="form-field-button" >    
@@ -129,23 +129,23 @@
 
 <script>
     function mudar_campo(id, valor) {
-        let div = document.getElementById(id);
+        let div1 = document.getElementById(id);
         if (valor === 'nome') {
-            div.innerHTML = `
+            div1.innerHTML = `
             <label for="novoNome">Novo Nome:</label>     
             <input type="text" name="novoNome" required>
             `;
         }
         else {
-            div.innerHTML = `
+            div1.innerHTML = `
             <label for="novaBiografia">Nova Biografia:</label>     
             <textarea maxlength="2048" name="novaBiografia" required></textarea>
             `;        
         }
     }
 
-    let select = document.getElementById('atualizarDiretor');
-    select.addEventListener('change', () => {
-        mudar_campo('atualizar-dado', select.value);
+    let select1 = document.getElementById('atualizarDiretor');
+    select1.addEventListener('change', () => {
+        mudar_campo('atualizar-dado', select1.value);
     })
 </script>

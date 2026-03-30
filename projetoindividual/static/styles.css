@@ -186,6 +186,10 @@ textarea {
     line-height: 8px;
 }
 
+input, select, textarea, label {
+    font-size: 15px;
+}
+
 
 
 @media (max-width: 660px) {
@@ -218,7 +222,7 @@ textarea {
         height: 55px;
     }
 
-    .nav1-link, .nav2-link, .nav3-link, .form-button {
+    .nav1-link, .nav2-link, .nav3-link, .form-button, input, select, textarea, label {
         font-size: 14px;
     }
     .nav3-link {
