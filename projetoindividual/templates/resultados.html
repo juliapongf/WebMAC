@@ -1,4 +1,10 @@
+<!-- HTML PARCIAL COM OS RESULTADOS DAS PESQUISAS, E QUE TAMBÉM IMPLEMENTA PAGINAÇÃO -->
+
+
 {% if campo1 == "filme" %}
+
+    {# HTML CASO A PESQUISA SEJA DE FILMES #}
+
     {% for item in resultados %}
         <div class="caixinha" style="align-items: start;">
             <h3>Filme: {{ item.titulo }}</h3>
@@ -31,7 +37,12 @@
         </div>
     {% endfor%}
 
+
+
 {% else %}
+
+    {# HTML CASO A PESQUISA SEJA DE ATORES OU DIRETORES #}
+
     {% for item in resultados %}
     <div class="caixinha" style="align-items: start;">
         {% if campo1 == "ator" %}
@@ -59,12 +70,15 @@
 
 {% endif %}
 
+
+<!-- BOTÔES DE PAGINAÇÃO -->
+
 <div class="nav3">
     {% if temanterior %}
         <button hx-get="/buscar?busca={{ busca }}&campo1={{ campo1 }}&campo2={{ campo2 }}&pagina={{ pagina - 1 }}"
             hx-target="#caixa2"
-            class="nav3-link mutavel"
-            >Anterior
+            class="nav3-link mutavel">
+            Anterior
         </button>
     {% endif%}
     {% if temproximo %}

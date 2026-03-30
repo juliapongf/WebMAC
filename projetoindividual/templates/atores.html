@@ -1,3 +1,7 @@
+<!-- HTML PARCIAL DA ABA DE EDITAR ATORES -->
+
+
+<!-- CSS QUE MOSTRA VISUALMENTE QUAL DAS ABAS (FILMES, ATORES OU DIRETORES) ESTÁ ATIVA -->
 <style>
     #aba-atores {
         background-color: rgb(105, 105, 105);
@@ -10,6 +14,8 @@
         color: black;
     }
 </style>
+
+<!-- CAIXAS PARA CRIAÇÃO, ATUALIZAÇÃO E DELEÇÃO DO BANCO DE DADOS -->
 
 <div class="caixinha">
     <h2>Adicionar um ator</h2>
@@ -41,11 +47,14 @@
         </div>
         <div class="form-field" >
             <label for="campo">Campo a ser atualizado:</label>       
-            <select name="campo">
+            <select hx-get="/editar/campoAtualizacao"
+                    hx-trigger="change"
+                    name="campo">
                 <option value="nome">Nome</option>
                 <option value="biografia">Biografia</option>
             </select>
         </div>
+        <div class="form-field" id="atualizar-dado"></div>
         <div class="form-field-button" >    
             <button class="form-button mutavel" type="submit">Atualizar</button>
         </div>
@@ -90,3 +99,7 @@
     </form>
     <div class="mensagem mutavel" id="mensagem4"></div>
 </div>
+
+<script>
+    
+</script>

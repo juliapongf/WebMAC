@@ -33,16 +33,19 @@ def on_startup() -> None:
 ################################################################################################
 
 
+# Tela 1
 @app.get("/home")
 async def pagina_inicial(request: Request, response_class=HTMLResponse):
     return templates.TemplateResponse(request, "index.html")
 
+# Tela 2
 @app.get("/editar")
 async def pagina_editar(request: Request, response_class=HTMLResponse):
     if (not "HX-Request" in request.headers):
         return templates.TemplateResponse(request, "editar.html", {"pagina": "/editar/filmes"})
     return templates.TemplateResponse(request, "editar.html")
 
+# HTMLs parciais da tela 2
 @app.get("/editar/filmes")
 async def pagina_filmes(request: Request, response_class=HTMLResponse):
     if (not "HX-Request" in request.headers):
@@ -50,21 +53,29 @@ async def pagina_filmes(request: Request, response_class=HTMLResponse):
     return templates.TemplateResponse(request, "filmes.html")
 
 @app.get("/editar/ator")
-async def pagina_filmes(request: Request, response_class=HTMLResponse):
+async def pagina_atores(request: Request, response_class=HTMLResponse):
     if (not "HX-Request" in request.headers):
         return templates.TemplateResponse(request, "editar.html", {"pagina": "/editar/filmes"})
     return templates.TemplateResponse(request, "atores.html")
 
 @app.get("/editar/diretor")
-async def pagina_filmes(request: Request, response_class=HTMLResponse):
+async def pagina_diretores(request: Request, response_class=HTMLResponse):
     if (not "HX-Request" in request.headers):
         return templates.TemplateResponse(request, "editar.html", {"pagina": "/editar/filmes"})
     return templates.TemplateResponse(request, "diretores.html")
 
+@app.get("/editar/campoAtualizacao")
+async def pagina_atualizar(request: Request, response_class=HTMLResponse):
+    if (not "HX-Request" in request.headers):
+        return templates.TemplateResponse(request, "editar.html", {"pagina": "/editar/filmes"})
+    return templates.TemplateResponse(request, "diretores.html")
+
+# Tela 3
 @app.get("/pesquisar")
 async def pagina_pesquisar(request: Request, response_class=HTMLResponse):
     return templates.TemplateResponse(request, "pesquisar.html")
 
+# Tela 4
 @app.get("/configurar")
 async def pagina_configurar(request: Request, response_class=HTMLResponse):
     return templates.TemplateResponse(request, "configurar.html")
@@ -128,7 +139,7 @@ def criar_atuacao(idfilme: int = Form(...), idator: int = Form(...)):
         filme = session.exec(query1).first()
         if (not filme):
             return HTMLResponse(content="<p>Filme não encontrado!</p>")
-        query2 = select(Ator).where(Ator.id == iddiretor)
+        query2 = select(Ator).where(Ator.id == idator)
         ator = session.exec(query2).first()
         if (not ator):
             return HTMLResponse(content="<p>Ator/atriz não encontrado(a)!</p>")
@@ -180,14 +191,18 @@ def deletar_ator(id: int):
 
 ##### Busca de itens no banco de dados #####
 
+# Funções de busca para cada tipo de objeto
+
 def buscar_filmes(busca, lista, pagina):
     limite = 3
     with Session(engine) as session:
-        if (lista == "ambas"):
+        if (lista == "ambas"): # Seleciona filmes de ambas as listas
             query = select(Filme).where((Filme.titulo).contains(busca)).order_by(Filme.titulo)
-        else:
+        else: # Seleciona filmes de apenas uma das listas, "Favoritos" ou "Para assistir"
             query = select(Filme).where(Filme.lista == lista, (Filme.titulo).contains(busca)).order_by(Filme.titulo)
         filmes = session.exec(query).all()
+
+        # Implementando paginação
         inicio = pagina*limite
         tamanho = len(filmes)
         if (pagina == 0):
@@ -203,6 +218,7 @@ def buscar_filmes(busca, lista, pagina):
         else:
             resultados = filmes[inicio:tamanho]
 
+        # Obtendo as listas de diretores e atores de cada filme
         diretores1 = {}
         atores1 = {}
         for filme in resultados:
@@ -224,6 +240,8 @@ def buscar_diretores(busca, pagina):
     with Session(engine) as session:
         query = select(Diretor).where((Diretor.nome).contains(busca)).order_by(Diretor.nome)
         diretores = session.exec(query).all()
+
+        # Implementando paginação
         inicio = pagina*limite
         tamanho = len(diretores)
         if (pagina == 0):
@@ -239,6 +257,7 @@ def buscar_diretores(busca, pagina):
         else:
             resultados = diretores[inicio:tamanho]
         
+        # Obtendo as listas de filmes de cada diretor
         filmes1 = {}
         for diretor in resultados:
             filmes2 = []
@@ -254,6 +273,8 @@ def buscar_atores(busca, pagina):
     with Session(engine) as session:
         query = select(Ator).where((Ator.nome).contains(busca)).order_by(Ator.nome)
         atores = session.exec(query).all()
+
+        # Implementando paginação
         inicio = pagina*limite
         tamanho = len(atores)
         if (pagina == 0):
@@ -269,6 +290,7 @@ def buscar_atores(busca, pagina):
         else:
             resultados = atores[inicio:tamanho]
 
+        # Obtendo as listas de filmes de cada ator
         filmes1 = {}
         for ator in resultados:
             filmes2 = []
@@ -278,6 +300,8 @@ def buscar_atores(busca, pagina):
             filmes1[ator.id] = list(filmes2)
 
         return resultados, pagina, temanterior, temproximo, busca, filmes1
+    
+# Função de busca geral
     
 @app.get("/buscar", response_class=HTMLResponse)
 def pesquisar(request: Request, campo1: str, campo2: str, pagina: int=0, busca: str | None=''):
@@ -290,4 +314,6 @@ def pesquisar(request: Request, campo1: str, campo2: str, pagina: int=0, busca: 
     else:
         resultados, pagina, temanterior, temproximo, busca, filmes = buscar_diretores(busca, pagina)
         return templates.TemplateResponse(request, "resultados.html", {"resultados": resultados, "campo1": campo1, "campo2": campo2, "pagina": pagina, "temanterior": temanterior, "temproximo": temproximo, "busca": busca, "filmes": filmes})
-    
+
+
+##### Atualização de itens no banco de dados #####

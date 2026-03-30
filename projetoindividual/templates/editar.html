@@ -1,7 +1,14 @@
 {% extends "layout.html" %}
 
 {% block conteudo %}
+
+    <!-- HTML DA PÁGINA DE EDITAR DADOS -->
+
+
+    <!-- SUBHEADER -->
     <div class="subheader mutavel"> Editar minhas listas </div>
+
+    <!-- BARRA DE NAVEGAÇÃO SECUNDÁRIA ENTRE ABAS -->
     <nav class="nav2">
         <button class="nav2-link"
             hx-get="/editar/filmes"
@@ -23,6 +30,8 @@
         > Diretores </button>
 
     </nav>
+
+    <!-- DIV QUE CONTÉM AS CAIXAS DE CRIAÇÃO, ATUALIZAÇÃO E DELEÇÃO DO BANCO DE DADOS -->
     <div class="caixa1"
          hx-get="{{ pagina }}"
          hx-target=".caixa1"

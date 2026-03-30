@@ -1,3 +1,7 @@
+<!-- HTML PARCIAL DA ABA DE EDITAR FILMES -->
+
+
+<!-- CSS QUE MOSTRA VISUALMENTE QUAL DAS ABAS (FILMES, ATORES OU DIRETORES) ESTÁ ATIVA -->
 <style>
     #aba-filmes {
         background-color: rgb(105, 105, 105);
@@ -10,6 +14,10 @@
         color: black;
     }
 </style>
+
+
+<!-- CAIXAS PARA CRIAÇÃO, ATUALIZAÇÃO E DELEÇÃO DO BANCO DE DADOS -->
+
 
 <div class="caixinha">
     <h2>Adicionar um filme</h2>
@@ -35,11 +43,11 @@
             <label for="nota">Nota:</label>     
             <input type="number" name="nota" required>
         </div>
-        <div class="form-field-textarea" >    
+        <div class="form-field-textarea">    
             <label for="resenha">Resenha:</label>     
             <textarea maxlength="2048" name="resenha"></textarea>
         </div>
-        <div class="form-field-button" >    
+        <div class="form-field-button">    
             <button class="form-button mutavel" type="submit">Adicionar</button>
         </div>
 
@@ -59,7 +67,7 @@
         </div>
         <div class="form-field" >
             <label for="campo">Campo a ser atualizado:</label>       
-            <select name="campo">
+            <select id="atualizarFilme" name="campo">
                 <option value="titulo">Título</option>
                 <option value="ano">Ano</option>
                 <option value="lista">Lista</option>
@@ -67,7 +75,10 @@
                 <option value="resenha">Resenha</option>
             </select>
         </div>
-        <div id="atualizar-filme"></div>
+        <div class="form-field" id="atualizar-dado">    
+            <label for="titulo">Título:</label>     
+            <input type="text" name="titulo" required>
+        </div>
         <div class="form-field-button" >    
             <button class="form-button mutavel" type="submit">Atualizar</button>
         </div>
@@ -132,3 +143,49 @@
 
     <div class="mensagem mutavel" id="mensagem5"></div>
 </div>
+
+<!-- SCRIPT QUE RENDERIZA O CAMPO QUE O USUÁRIO QUER ATUALIZAR -->
+
+<script>
+    function mudar_campo(id, valor) {
+        let div = document.getElementById(id);
+        if (valor === 'titulo') {
+            div.innerHTML = `
+            <label for="titulo">Título:</label>     
+            <input type="text" name="titulo" required>
+            `;
+        }
+        else if (valor === 'ano') {
+            div.innerHTML = `
+            <label for="ano">Ano:</label>     
+            <input type="number" name="ano" required>
+            `;
+        }
+        else if (valor === 'lista') {
+            div.innerHTML = `
+            <label for="lista">Atualizar lista:</label>       
+            <select name="lista" required>
+                <option value="Favoritos">Favoritos</option>
+                <option value="Para assistir">Para assistir</option>
+            </select>
+            `;
+        }
+        else if (valor === 'nota') {
+            div.innerHTML = `
+            <label for="nota">Nota:</label>     
+            <input type="number" name="nota" required>
+            `;        
+        }
+        else {
+            div.innerHTML = `
+            <label for="resenha">Resenha:</label>     
+            <textarea maxlength="2048" name="resenha" required></textarea>
+            `;        
+        }
+    }
+
+    let select = document.getElementById('atualizarFilme');
+    select.addEventListener('change', () => {
+        mudar_campo('atualizar-dado', select.value);
+    })
+</script>
