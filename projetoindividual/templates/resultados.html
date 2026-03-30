@@ -1,57 +1,78 @@
 {% if campo1 == "filme" %}
     {% for item in resultados %}
-        <div class="caixinha">
+        <div class="caixinha" style="align-items: start;">
+            <h3>Filme: {{ item.titulo }}</h3>
             <ul>
-                <li>Título: {{ item.titulo }}</li>
+                <li>ID: {{ item.id }}</li>
                 <li>Ano: {{ item.ano }}</li>
                 <li>Lista: {{ item.lista }}</li>
                 <li>Nota: {{ item.nota }}</li>
-                <li>
-                    Diretor(es): |
-                    {% for diretor in item.diretores %}
-                        {{ diretor.nome }} |
-                    {% endfor %}
-                </li>
-                <li>
-                    Ator(es): |
-                    {% for ator in item.atores %}
-                        {{ ator.nome }} |
-                    {% endfor %}
-                </li>
-                <li>Resenha:</li>
-            </ul>
-            <p>{{ item.resenha }}</p>    
+                {% if diretores[item.id] %}
+                    <li>
+                        Diretor(es): |
+                        {% for diretor in diretores[item.id] %}
+                            {{ diretor }} |
+                        {% endfor %}
+                    </li>
+                {% endif %}
+                {% if atores[item.id] %}
+                    <li>
+                        Ator(es): |
+                        {% for ator in atores[item.id] %}
+                            {{ ator }} |
+                        {% endfor %}
+                    </li>
+                {% endif %}
+                {% if item.resenha %}
+                    <li>Resenha: {{ item.resenha }}</li>
+                {% endif %}
+            </ul> 
 
         </div>
     {% endfor%}
 
 {% else %}
     {% for item in resultados %}
-    <div class="caixinha">
+    <div class="caixinha" style="align-items: start;">
+        {% if campo1 == "ator" %}
+            <h3>Ator: {{ item.nome }}</li>
+        {% else %}
+            <h3>Diretor: {{ item.nome }}</li>
+        {% endif %}
         <ul>
-            <li>Nome: {{ item.titulo }}</li>
-            <li>
-                Filme(s): | 
-                {% for filme in item.filmes %}
-                    {{ filme.titulo }} |
-                {% endfor %}
-            </li>
-            <li>Biografia:</li>
+            <li>ID: {{ item.id }}</li>
+            {% if filmes[item.id] %}
+                <li>
+                    Filme(s): | 
+                    {% for filme in filmes[item.id] %}
+                        {{ filme }} |
+                    {% endfor %}
+                </li>
+            {% endif %}
+            {% if item.biografia %}
+                <li>Biografia: {{ item.biografia }}</li>
+            {% endif %}
         </ul>
-        <p>{{ item.biografia }}</p>    
 
     </div>
     {% endfor%}
 
 {% endif %}
 
-{% if temanterior %}
-<button hx-get="/pesquisar?busca={{ busca }}&campo1={{ campo1 }}&campo2={{ campo2 }}&pagina={{ pagina - 1 }}"
-    hx-target="#caixa2"
-    >Anterior</button>
-{% endif%}
-{% if temproximo %}
-<button hx-get="/pesquisar?busca={{ busca }}&campo1={{ campo1 }}&campo2={{ campo2 }}&pagina={{ pagina + 1 }}"
-    hx-target="#caixa2">
-    Próximo</button>
-{% endif %}
+<div class="nav3">
+    {% if temanterior %}
+        <button hx-get="/buscar?busca={{ busca }}&campo1={{ campo1 }}&campo2={{ campo2 }}&pagina={{ pagina - 1 }}"
+            hx-target="#caixa2"
+            class="nav3-link mutavel"
+            >Anterior
+        </button>
+    {% endif%}
+    {% if temproximo %}
+        <button hx-get="/buscar?busca={{ busca }}&campo1={{ campo1 }}&campo2={{ campo2 }}&pagina={{ pagina + 1 }}"
+            hx-target="#caixa2"
+            class="nav3-link mutavel">
+            Próximo
+        </button>
+    {% endif %}
+
+</div>

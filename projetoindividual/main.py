@@ -183,7 +183,10 @@ def deletar_ator(id: int):
 def buscar_filmes(busca, lista, pagina):
     limite = 3
     with Session(engine) as session:
-        query = select(Filme).where((Filme.titulo).contains(busca)).order_by(Filme.titulo)
+        if (lista == "ambas"):
+            query = select(Filme).where((Filme.titulo).contains(busca)).order_by(Filme.titulo)
+        else:
+            query = select(Filme).where(Filme.lista == lista, (Filme.titulo).contains(busca)).order_by(Filme.titulo)
         filmes = session.exec(query).all()
         inicio = pagina*limite
         tamanho = len(filmes)
@@ -196,11 +199,25 @@ def buscar_filmes(busca, lista, pagina):
         else:
             temproximo = False
         if (inicio+limite <= tamanho):
-            paginacao = filmes[inicio: inicio+limite]
+            resultados = filmes[inicio: inicio+limite]
         else:
-            paginacao = filmes[inicio:tamanho]
+            resultados = filmes[inicio:tamanho]
 
-        return paginacao, pagina, temanterior, temproximo, busca
+        diretores1 = {}
+        atores1 = {}
+        for filme in resultados:
+            diretores2 = []
+            atores2 = []
+            for diretor in filme.diretores:
+                d_nome = diretor.nome
+                diretores2.append(d_nome)
+            for ator in filme.atores:
+                a_nome = ator.nome
+                atores2.append(a_nome)
+            diretores1[filme.id] = list(diretores2)
+            atores1[filme.id] = list(atores2)
+
+        return resultados, pagina, temanterior, temproximo, busca, diretores1, atores1
     
 def buscar_diretores(busca, pagina):
     limite=3
@@ -218,11 +235,19 @@ def buscar_diretores(busca, pagina):
         else:
             temproximo = False
         if (inicio+limite <= tamanho):
-            paginacao = diretores[inicio: inicio+limite]
+            resultados = diretores[inicio: inicio+limite]
         else:
-            paginacao = diretores[inicio:tamanho]
+            resultados = diretores[inicio:tamanho]
+        
+        filmes1 = {}
+        for diretor in resultados:
+            filmes2 = []
+            for filme in diretor.filmes:
+                titulo = filme.titulo
+                filmes2.append(titulo)
+            filmes1[diretor.id] = list(filmes2)
 
-        return paginacao, pagina, temanterior, temproximo, busca
+        return resultados, pagina, temanterior, temproximo, busca, filmes1
 
 def buscar_atores(busca, pagina):
     limite=3
@@ -244,14 +269,25 @@ def buscar_atores(busca, pagina):
         else:
             resultados = atores[inicio:tamanho]
 
-        return resultados, pagina, temanterior, temproximo, busca
+        filmes1 = {}
+        for ator in resultados:
+            filmes2 = []
+            for filme in ator.filmes:
+                titulo = filme.titulo
+                filmes2.append(titulo)
+            filmes1[ator.id] = list(filmes2)
+
+        return resultados, pagina, temanterior, temproximo, busca, filmes1
     
 @app.get("/buscar", response_class=HTMLResponse)
 def pesquisar(request: Request, campo1: str, campo2: str, pagina: int=0, busca: str | None=''):
     if (campo1 == "filme"):
-        resultados, pagina, temanterior, temproximo, busca = buscar_filmes(busca, campo2, pagina)
+        resultados, pagina, temanterior, temproximo, busca, diretores, atores = buscar_filmes(busca, campo2, pagina)
+        return templates.TemplateResponse(request, "resultados.html", {"resultados": resultados, "campo1": campo1, "campo2": campo2, "pagina": pagina, "temanterior": temanterior, "temproximo": temproximo, "busca": busca, "diretores": diretores, "atores": atores})
     elif (campo1 == "ator"):
-        resultados, pagina, temanterior, temproximo, busca = buscar_atores(busca, pagina)
+        resultados, pagina, temanterior, temproximo, busca, filmes = buscar_atores(busca, pagina)
+        return templates.TemplateResponse(request, "resultados.html", {"resultados": resultados, "campo1": campo1, "campo2": campo2, "pagina": pagina, "temanterior": temanterior, "temproximo": temproximo, "busca": busca, "filmes": filmes})
     else:
-        resultados, pagina, temanterior, temproximo, busca = buscar_diretores(busca, pagina)
-    return templates.TemplateResponse(request, "resultados.html", {"resultados": resultados, "campo1": campo1, "campo2": campo2, "pagina": pagina, "temanterior": temanterior, "temproximo": temproximo, "busca": busca})
+        resultados, pagina, temanterior, temproximo, busca, filmes = buscar_diretores(busca, pagina)
+        return templates.TemplateResponse(request, "resultados.html", {"resultados": resultados, "campo1": campo1, "campo2": campo2, "pagina": pagina, "temanterior": temanterior, "temproximo": temproximo, "busca": busca, "filmes": filmes})
+    
