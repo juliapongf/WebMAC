@@ -40,21 +40,24 @@
 <div class="caixinha">
     <h2>Atualizar dados de um ator</h2>
 
-    <form>
+    <form hx-put="/atualizaAtor"
+          hx-target="#mensagem2"
+          hx-trigger="submit">
         <div class="form-field" >    
             <label for="id">ID do ator:</label>     
             <input type="number" name="id">
         </div>
         <div class="form-field" >
             <label for="campo">Campo a ser atualizado:</label>       
-            <select hx-get="/editar/campoAtualizacao"
-                    hx-trigger="change"
-                    name="campo">
+            <select id="atualizarAtor" name="campo">
                 <option value="nome">Nome</option>
                 <option value="biografia">Biografia</option>
             </select>
         </div>
-        <div class="form-field" id="atualizar-dado"></div>
+        <div class="form-field" id="atualizar-dado">    
+            <label for="novoNome">Novo Nome:</label>     
+            <input type="text" name="novoNome" required>
+        </div>
         <div class="form-field-button" >    
             <button class="form-button mutavel" type="submit">Atualizar</button>
         </div>
@@ -64,7 +67,9 @@
 </div>
 
 <div class="caixinha">
-    <h2>Adicionar filmes de um ator</h2>
+    <h2>Adicionar/retirar filmes de um ator</h2>
+
+    <h3>Adicionar filme</h3>
 
     <form hx-post="/novaAtuacao"
           hx-target="#mensagem3">
@@ -81,6 +86,26 @@
         </div>
     </form>
     <div class="mensagem mutavel" id="mensagem3"></div>
+
+    <h3>Retirar filme</h3>
+
+    <form hx-delete="/deletaAtuacao"
+          hx-target="#mensagem3-1">
+        <div class="form-field" >    
+            <label for="idfilme">ID do filme:</label>     
+            <input type="number" name="idfilme">
+        </div>
+        <div class="form-field" >    
+            <label for="idator">ID do ator:</label>     
+            <input type="number" name="idator">
+        </div>
+        <div class="form-field-button" >    
+            <button class="form-button mutavel" type="submit">Retirar ator</button>
+        </div>
+
+    </form>
+
+    <div class="mensagem mutavel" id="mensagem3-1"></div>
 
 </div>
 
@@ -100,6 +125,27 @@
     <div class="mensagem mutavel" id="mensagem4"></div>
 </div>
 
+<!-- SCRIPT QUE RENDERIZA O CAMPO QUE O USUÁRIO QUER ATUALIZAR -->
+
 <script>
-    
+    function mudar_campo(id, valor) {
+        let div = document.getElementById(id);
+        if (valor === 'nome') {
+            div.innerHTML = `
+            <label for="novoNome">Novo Nome:</label>     
+            <input type="text" name="novoNome" required>
+            `;
+        }
+        else {
+            div.innerHTML = `
+            <label for="novaBiografia">Nova Biografia:</label>     
+            <textarea maxlength="2048" name="novaBiografia" required></textarea>
+            `;        
+        }
+    }
+
+    let select = document.getElementById('atualizarAtor');
+    select.addEventListener('change', () => {
+        mudar_campo('atualizar-dado', select.value);
+    })
 </script>

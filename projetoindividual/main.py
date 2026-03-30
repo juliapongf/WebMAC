@@ -64,12 +64,6 @@ async def pagina_diretores(request: Request, response_class=HTMLResponse):
         return templates.TemplateResponse(request, "editar.html", {"pagina": "/editar/filmes"})
     return templates.TemplateResponse(request, "diretores.html")
 
-@app.get("/editar/campoAtualizacao")
-async def pagina_atualizar(request: Request, response_class=HTMLResponse):
-    if (not "HX-Request" in request.headers):
-        return templates.TemplateResponse(request, "editar.html", {"pagina": "/editar/filmes"})
-    return templates.TemplateResponse(request, "diretores.html")
-
 # Tela 3
 @app.get("/pesquisar")
 async def pagina_pesquisar(request: Request, response_class=HTMLResponse):
@@ -187,6 +181,36 @@ def deletar_ator(id: int):
         session.delete(ator)
         session.commit()
         return HTMLResponse(content=f"<p>O(a) ator/atriz {nome} foi deletado(a)!</p>")
+    
+@app.delete("/deletaDirecao", response_class=HTMLResponse)
+def deletar_direcao(idfilme: int, iddiretor: int):
+    with Session(engine) as session:
+        query1 = select(Direcao).where(Direcao.filme_id == idfilme, Direcao.diretor_id == iddiretor)
+        direcao = session.exec(query1).first()
+        if (not direcao):
+            return HTMLResponse(content="<p>Diretor(a) já não dirigia esse filme!</p>")
+        query2 = select(Filme).where(Filme.id == idfilme)
+        filme = session.exec(query2).first()
+        query3 = select(Diretor).where(Diretor.id == iddiretor)
+        diretor = session.exec(query3).first()
+        session.delete(direcao)
+        session.commit()
+        return HTMLResponse(content=f"<p>O(a) diretor(a) {diretor.nome} não dirigiu o filme {filme.titulo}!</p>")
+    
+@app.delete("/deletaAtuacao", response_class=HTMLResponse)
+def deletar_atuacao(idfilme: int, idator: int):
+    with Session(engine) as session:
+        query = select(Direcao).where(Atuacao.filme_id == idfilme, Atuacao.ator_id == idator)
+        atuacao = session.exec(query).first()
+        if (not atuacao):
+            return HTMLResponse(content="<p>Ator/atriz já não fazia parte desse filme!</p>")
+        query2 = select(Filme).where(Filme.id == idfilme)
+        filme = session.exec(query2).first()
+        query3 = select(Ator).where(Ator.id == idator)
+        ator = session.exec(query3).first()
+        session.delete(atuacao)
+        session.commit()
+        return HTMLResponse(content=f"<p>O(a) diretor(a) {ator.nome} não participou do filme {filme.titulo}!</p>")
     
 
 ##### Busca de itens no banco de dados #####
@@ -317,3 +341,42 @@ def pesquisar(request: Request, campo1: str, campo2: str, pagina: int=0, busca: 
 
 
 ##### Atualização de itens no banco de dados #####
+
+@app.put("/atualizaFilme", response_class=HTMLResponse)
+def atualizar_filme(id: int = Form(...), campo: str = Form(...), novoTitulo: Optional[str] = Form(None), novoAno: Optional[int] = Form(None), novaLista: Optional[str] = Form(None), novaNota: Optional[int] = Form(None), novaResenha: Optional[str] = Form(None)):
+    with Session(engine) as session:
+        query = select(Filme).where(Filme.id == id)
+        filme = session.exec(query).first()
+        if (not filme):
+            return HTMLResponse(content="<p>Filme não encontrado!</p>")
+        
+        if (campo == "titulo"):
+            tituloAntigo = filme.titulo
+            filme.titulo = novoTitulo
+            session.commit()
+            session.refresh(filme)
+            return HTMLResponse(content=f"<p>O título do filme {tituloAntigo} foi atualizado para {filme.titulo}!</p>")
+        elif (campo == "ano"):
+            anoAntigo = filme.ano
+            filme.ano = novoAno
+            session.commit()
+            session.refresh(filme)
+            return HTMLResponse(content=f"<p>O ano do filme {filme.titulo} foi atualizado de {anoAntigo} para {filme.ano}!</p>")
+        elif (campo == "lista"):
+            listaAntiga = filme.lista
+            filme.lista = novaLista
+            session.commit()
+            session.refresh(filme)
+            return HTMLResponse(content=f"<p>A lista do filme {filme.titulo} foi atualizada de {listaAntiga} para {filme.lista}!</p>")
+        elif (campo == "nota"):
+            notaAntiga = filme.nota
+            filme.nota = novaNota
+            session.commit()
+            session.refresh(filme)
+            return HTMLResponse(content=f"<p>A nota do filme {filme.titulo} foi atualizado de {notaAntiga} para {filme.nota}!</p>")
+        else:
+            resenhaAntiga = filme.resenha
+            filme.resenha = novaResenha
+            session.commit()
+            session.refresh(filme)
+            return HTMLResponse(content=f"<p>A resenha do filme {filme.titulo} foi atualizado de {resenhaAntiga} para {filme.resenha}!</p>")

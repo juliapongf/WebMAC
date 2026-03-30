@@ -58,12 +58,16 @@
 </div>
 
 <div class="caixinha">
-    <h2>Atualizar dados de um filme</h2>
+    <h2>Atualizar filme</h2>
 
-    <form>
-        <div class="form-field" >    
+    <h3>Atualizar informações de um filme</h3>
+
+    <form hx-put="/atualizaFilme"
+          hx-target="#mensagem2"
+          hx-trigger="submit">
+        <div class="form-field">    
             <label for="id">ID do filme:</label>     
-            <input type="number" name="id">
+            <input type="number" name="id" required>
         </div>
         <div class="form-field" >
             <label for="campo">Campo a ser atualizado:</label>       
@@ -76,18 +80,19 @@
             </select>
         </div>
         <div class="form-field" id="atualizar-dado">    
-            <label for="titulo">Título:</label>     
-            <input type="text" name="titulo" required>
+            <label for="novoTitulo">Novo Título:</label>     
+            <input type="text" name="novoTitulo" required>
         </div>
         <div class="form-field-button" >    
             <button class="form-button mutavel" type="submit">Atualizar</button>
         </div>
     </form>
     <div class="mensagem mutavel" id="mensagem2"></div>
+
 </div>
 
 <div class="caixinha">
-    <h2>Adicionar diretores e atores de um filme</h2>
+    <h2>Adicionar/remover diretores e atores de um filme</h2>
 
     <h3>Adicionar diretor</h3>
     <form hx-post="/novaDirecao"
@@ -124,6 +129,46 @@
     </form>
     <div class="mensagem mutavel" id="mensagem4"></div>
 
+    <h3>Retirar diretor</h3>
+
+    <form hx-delete="/deletaDirecao"
+          hx-target="#mensagem3-1">
+        <div class="form-field" >    
+            <label for="idfilme">ID do filme:</label>     
+            <input type="number" name="idfilme">
+        </div>
+        <div class="form-field" >    
+            <label for="iddiretor">ID do ator:</label>     
+            <input type="number" name="iddiretor">
+        </div>
+        <div class="form-field-button" >    
+            <button class="form-button mutavel" type="submit">Retirar diretor</button>
+        </div>
+
+    </form>
+
+    <div class="mensagem mutavel" id="mensagem3-1"></div>
+
+    <h3>Retirar ator</h3>
+
+    <form hx-delete="/deletaAtuacao"
+          hx-target="#mensagem4-1">
+        <div class="form-field" >    
+            <label for="idfilme">ID do filme:</label>     
+            <input type="number" name="idfilme">
+        </div>
+        <div class="form-field" >    
+            <label for="idator">ID do ator:</label>     
+            <input type="number" name="idator">
+        </div>
+        <div class="form-field-button" >    
+            <button class="form-button mutavel" type="submit">Retirar ator</button>
+        </div>
+
+    </form>
+
+    <div class="mensagem mutavel" id="mensagem4-1"></div>
+
 </div>
 
 <div class="caixinha">
@@ -151,20 +196,20 @@
         let div = document.getElementById(id);
         if (valor === 'titulo') {
             div.innerHTML = `
-            <label for="titulo">Título:</label>     
-            <input type="text" name="titulo" required>
+            <label for="novoTitulo">Novo Título:</label>     
+            <input type="text" name="novoTitulo" required>
             `;
         }
         else if (valor === 'ano') {
             div.innerHTML = `
-            <label for="ano">Ano:</label>     
-            <input type="number" name="ano" required>
+            <label for="novoAno">Novo Ano:</label>     
+            <input type="number" name="novoAno" required>
             `;
         }
         else if (valor === 'lista') {
             div.innerHTML = `
-            <label for="lista">Atualizar lista:</label>       
-            <select name="lista" required>
+            <label for="novaLista">Atualizar lista:</label>       
+            <select name="novaLista" required>
                 <option value="Favoritos">Favoritos</option>
                 <option value="Para assistir">Para assistir</option>
             </select>
@@ -172,14 +217,14 @@
         }
         else if (valor === 'nota') {
             div.innerHTML = `
-            <label for="nota">Nota:</label>     
-            <input type="number" name="nota" required>
+            <label for="novaNota">Nova Nota:</label>     
+            <input type="number" name="novaNota" required>
             `;        
         }
         else {
             div.innerHTML = `
-            <label for="resenha">Resenha:</label>     
-            <textarea maxlength="2048" name="resenha" required></textarea>
+            <label for="novaResenha">Nova Resenha:</label>     
+            <textarea maxlength="2048" name="novaResenha" required></textarea>
             `;        
         }
     }
