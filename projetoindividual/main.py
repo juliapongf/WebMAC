@@ -157,7 +157,7 @@ def deletar_filme(id: int):
         titulo = filme.titulo
         session.delete(filme)
         session.commit()
-        return HTMLResponse(content=f"<p>O filme {titulo} foi deletado!</p>")
+        return HTMLResponse(content=f"<p>O filme {titulo} foi excluído!</p>")
     
 @app.delete("/deletaDiretor", response_class=HTMLResponse)
 def deletar_diretor(id: int):
@@ -169,7 +169,7 @@ def deletar_diretor(id: int):
         nome = diretor.nome
         session.delete(diretor)
         session.commit()
-        return HTMLResponse(content=f"<p>O(a) diretor(a) {nome} foi deletado(a)!</p>")
+        return HTMLResponse(content=f"<p>O(a) diretor(a) {nome} foi excluído(a)!</p>")
     
 @app.delete("/deletaAtor", response_class=HTMLResponse)
 def deletar_ator(id: int):
@@ -181,7 +181,7 @@ def deletar_ator(id: int):
         nome = ator.nome
         session.delete(ator)
         session.commit()
-        return HTMLResponse(content=f"<p>O(a) ator/atriz {nome} foi deletado(a)!</p>")
+        return HTMLResponse(content=f"<p>O(a) ator/atriz {nome} foi excluído(a)!</p>")
     
 @app.delete("/deletaDirecao", response_class=HTMLResponse)
 def deletar_direcao(idfilme: int, iddiretor: int):
@@ -374,7 +374,7 @@ def atualizar_filme(id: int = Form(...), campo: str = Form(...), novoTitulo: Opt
             filme.nota = novaNota
             session.commit()
             session.refresh(filme)
-            return HTMLResponse(content=f"<p>A nota do filme {filme.titulo} foi atualizado de {notaAntiga} para {filme.nota}!</p>")
+            return HTMLResponse(content=f"<p>A nota do filme {filme.titulo} foi atualizada para {filme.nota}!</p>")
         else:
             resenhaAntiga = filme.resenha
             filme.resenha = novaResenha

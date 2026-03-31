@@ -210,6 +210,15 @@ input, select, textarea, label {
     }
 }
 
+@media (max-width: 550px) {
+    .form-field, .form-field-textarea {
+        flex-direction: column;
+    }
+    input, select, textarea {
+        width: 90%;
+    }
+}
+
 
 @media (max-width: 400px) {
     header {
@@ -222,8 +231,8 @@ input, select, textarea, label {
         height: 55px;
     }
 
-    .nav1-link, .nav2-link, .nav3-link, .form-button, input, select, textarea, label {
-        font-size: 14px;
+    .nav2-link, .nav3-link, .form-button, input, select, textarea, label {
+        font-size: 15px;
     }
     .nav3-link {
         width: 45%;
