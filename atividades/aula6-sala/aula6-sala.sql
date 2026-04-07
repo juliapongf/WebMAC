@@ -36,7 +36,7 @@ CREATE TABLE produto (
     produto_id INTEGER,
     nome TEXT NOT NULL,
     fabricante_id INTEGER,
-    FOREIGN KEY (fabricante_id) REFERENCES fabricante(id)
+    FOREIGN KEY (fabricante_id) REFERENCES fabricante(fabricante_id)
 );
 
 CREATE TABLE pedido (
