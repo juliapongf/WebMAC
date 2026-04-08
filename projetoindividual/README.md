@@ -1,6 +1,6 @@
 # Projeto Individual da disciplina "MAC0350 - Introdução ao Desenvolvimento de Sistemas de Software
 
-## Aplicativo de filmes
+## Aplicativo de filmes "O Cinéfilo"
 
 ### Funcionalidades:
  - Adicionar filmes, diretores e atores (com hx-post);
